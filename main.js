@@ -21,7 +21,8 @@ function updateQuestion(book_info) {
     title = book_info.title;
     author = book_info.author_name[0];
     document.getElementById("question").innerHTML = 
-    `<h2>Did you mean <span>${title}</span> by <span>${author}</span>?</h2>`
+    `<h2>Did you mean <span>${title}</span> by <span>${author}</span>?</h2></br>`;
+    document.getElementById("answer-buttons").style.visibility = "visible";
   } catch (err) {
     document.getElementById("question").innerHTML =
     `<h2>No matches found. Please try another search.</h2>`
@@ -40,6 +41,7 @@ function generateUrl() {
   const searchInput = getInput();
   clearInput();
   const url = prepareUrl();
+
   return url;
 
   function prepareUrl() {

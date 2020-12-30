@@ -40,6 +40,12 @@ h1 {
 span {
     color:rgb(71, 68, 231);
 }
+#answer-buttons {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+}
 .book-tables {
     padding: 3rem;
     display: flex;
@@ -54,4 +60,7 @@ span {
     flex-direction: column;
     margin: 2rem;
     margin-top: 0.8rem;
+}
+button {
+    font-size: 1rem;
 }
