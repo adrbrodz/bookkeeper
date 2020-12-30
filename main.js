@@ -1,4 +1,4 @@
-const url = 'http://openlibrary.org/search.json?title=asdasdas';
+const url = 'http://openlibrary.org/search.json?title=secret+garden';
 
 function fetchData(url) {
   return new Promise((resolve, reject) => {
@@ -11,22 +11,13 @@ function fetchData(url) {
           return data.docs[book]
       }})
     )
-    reject('No matches found. Please try another search.')
   })
 }
 
 function processFetch(response) {
   return new Promise((resolve, reject) => {
-    console.log('Processing response')
     resolve(response)
   })
-}
-
-async function doWork() {
-  const response = await fetchData(url);
-  console.log('Response received')
-  const book_info = await processFetch(response)
-  updateQuestion(book_info);
 }
 
 function updateQuestion(book_info) {
@@ -40,4 +31,9 @@ function updateQuestion(book_info) {
     `<h2>No matches found. Please try another search.</h2>`
   }
 }
-doWork();
+
+async function searchTitle() {
+  const response = await fetchData(url);
+  const book_info = await processFetch(response)
+  updateQuestion(book_info);
+}

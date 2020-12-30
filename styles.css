@@ -8,7 +8,7 @@ h1 {
     width: 10rem;
     display: flex;
     margin: auto;
-    margin-top: 10rem;
+    margin-top: 8rem;
     justify-content: center;
     align-items: center;
 }
@@ -18,7 +18,7 @@ h1 {
     width: 5rem;
     display: flex;
     margin: auto;
-    margin-top: 0.33rem;
+    margin-top: 1rem;
 }
 #search-box {
     margin-top: 1.8rem;
@@ -31,6 +31,11 @@ h1 {
     font-size: 0.9rem;
     padding: 0.1rem;
     width: 25rem;
+}
+#question {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
 }
 span {
     color:rgb(71, 68, 231);
