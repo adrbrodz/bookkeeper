@@ -11,8 +11,10 @@
     <h1>Bookkeeper</h1>
     <img id="logo-image" src="https://media.wired.com/photos/5be4cd03db23f3775e466767/125:94/w_2375,h_1786,c_limit/books-521812297.jpg">
     <div id="search-box">
-        <button>S</button>
+        <button id="search-button" onclick="getBookInfo()">S</button>
         <input type="search" id="site-search" placeholder="Search for books...">
+    </div>
+    <div id="question">
     </div>
     <div class="book-tables">
         <div class="book-table" id="read-column">
@@ -22,6 +24,9 @@
         
         </div>
         <div class="book-table" id="to-read-column">
+        
+        </div>
+        <div class="book-table" id="wishlist-column">
         
         </div>
     </div>

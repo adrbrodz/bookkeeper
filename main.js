@@ -1,5 +1,5 @@
-const url = 'http://openlibrary.org/search.json?title=the+lord+of+the+rings';
-var book_info;
+const url = 'http://openlibrary.org/search.json?title=room+of+ones';
+
 function getData(url, callback) {
   fetch(url)
   .then(res => res.json())
@@ -11,7 +11,11 @@ function getData(url, callback) {
   callback(book_info);
   })
 };
-
-const thebooks = getData(url, book_info => {
-  console.log(book_info.title);
-});
+function getBookInfo() {
+  getData(url, book_info => {
+    title = book_info.title
+    author = book_info.author_name[0]
+    document.getElementById("question").innerHTML = 
+    `<h2>Did you mean <span>${title}</span> by <span>${author}?</span></h2>`
+  });
+}
