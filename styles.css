@@ -47,10 +47,19 @@ span {
     visibility: hidden;
 }
 #book-interface {
+    margin: auto;
+    width: 30rem;
     display: flex;
-    margin-left: 15rem;
     visibility: hidden;
-    align-items: center;
+}
+#book-interface h2 {
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+}
+#options {
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 #cover-image-container {
     display: flex;

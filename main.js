@@ -22,7 +22,7 @@ function updateQuestion(book_info) {
     author = book_info.author_name[0];
     cover_id = book_info.cover_i;
     document.getElementById("question").innerHTML = 
-    `<h2>Did you mean <span>${title}</span> by <span>${author}</span>?</h2></br>`;
+    `<h2>Did you mean <span id="title-span">${title}</span> by <span id="author-span">${author}</span>?</h2></br>`;
     document.getElementById("answer-buttons").style.visibility = "visible";
   } catch (err) {
     document.getElementById("question").innerHTML =
@@ -33,6 +33,7 @@ async function searchTitle() {
   if ( document.getElementById("site-search").value != "" ) {
     const url = generateUrl();
     document.getElementById("question").innerHTML = `<h2>Searching...</h2>`
+    document.getElementById("book-interface").innerHTML = ""
     const response = await fetchData(url);
     const book_info = await processFetch(response)
     updateQuestion(book_info);
@@ -58,14 +59,18 @@ function generateUrl() {
 function clickYes() {
   document.getElementById("book-interface").style.visibility = "visible";
   document.getElementById("book-interface").innerHTML =
-  `<div id="cover-image-container"><img id="cover-image" src="http://covers.openlibrary.org/b/id/10449357-M.jpg"></div>
+  `<div id="cover-image-container">
+    <img id="cover-image" src="http://covers.openlibrary.org/b/id/${cover_id}-M.jpg">
+  </div>
+  <div id="options-container">
+  <h2><span id="title-span">${title}</span> by <span id="author-span">${author}</span></h2></br>
   <div id="options">
-  <p>Add to Finished</p>
-  <p>Add to Currently Reading</p>
-  <p>Add to Want to Read</p>
-  <p>Save to Favorites</p>
-  <p>Show title in openlibrary.org</p>
-  <p>Show author in openlibrary.org</p>`
+  <p>Add to Finished <button>-></button></p>
+  <p>Add to Currently Reading <button>-></button></p>
+  <p>Add to Want to Read <button>-></button></p>
+  <p>Save to Favorites <button><3</button></p>
+  <p>Show title in openlibrary.org <button>-></button></p>
+  <p>Show author in openlibrary.org <button>-></button></p></div></dib>`
   document.getElementById("answer-buttons").style.visibility = "hidden";
   document.getElementById("question").innerHTML = "";
 }

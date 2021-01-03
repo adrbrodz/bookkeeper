@@ -3,3 +3,4 @@ change title to camelCase
 search on enter
 add urls to spans link to OpenLibrary
 show all/show less
+if cover not found make simple cover/placeholder
