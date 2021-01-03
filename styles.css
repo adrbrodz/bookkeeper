@@ -46,6 +46,16 @@ span {
     justify-content: center;
     visibility: hidden;
 }
+#book-interface {
+    display: flex;
+    margin-left: 15rem;
+    visibility: hidden;
+    align-items: center;
+}
+#cover-image-container {
+    display: flex;
+    margin-right: 1.5rem;
+}
 .book-tables {
     padding: 3rem;
     display: flex;

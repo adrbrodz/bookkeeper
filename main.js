@@ -20,6 +20,7 @@ function updateQuestion(book_info) {
   try {
     title = book_info.title;
     author = book_info.author_name[0];
+    cover_id = book_info.cover_i;
     document.getElementById("question").innerHTML = 
     `<h2>Did you mean <span>${title}</span> by <span>${author}</span>?</h2></br>`;
     document.getElementById("answer-buttons").style.visibility = "visible";
@@ -53,4 +54,18 @@ function generateUrl() {
   function clearInput() {
     document.getElementById("site-search").value = ""
   }
+}
+function clickYes() {
+  document.getElementById("book-interface").style.visibility = "visible";
+  document.getElementById("book-interface").innerHTML =
+  `<div id="cover-image-container"><img id="cover-image" src="http://covers.openlibrary.org/b/id/10449357-M.jpg"></div>
+  <div id="options">
+  <p>Add to Finished</p>
+  <p>Add to Currently Reading</p>
+  <p>Add to Want to Read</p>
+  <p>Save to Favorites</p>
+  <p>Show title in openlibrary.org</p>
+  <p>Show author in openlibrary.org</p>`
+  document.getElementById("answer-buttons").style.visibility = "hidden";
+  document.getElementById("question").innerHTML = "";
 }
