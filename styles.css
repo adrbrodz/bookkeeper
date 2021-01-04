@@ -4,11 +4,17 @@
     padding: 0;
 }
 body {background-color: rgb(240, 221, 196);}
+#favorites {
+    padding: 0.3rem;
+    display: flex;
+}
+#favorites div {
+    margin: 0.3rem;
+}
 h1 {
     width: 10rem;
     display: flex;
     margin: auto;
-    margin-top: 8rem;
     justify-content: center;
     align-items: center;
 }
@@ -30,7 +36,7 @@ h1 {
     border:solid white;
     font-size: 0.9rem;
     padding: 0.1rem;
-    width: 25rem;
+    width: 23rem;
 }
 #question {
     margin-top: 1.5rem;

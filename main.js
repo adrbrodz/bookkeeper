@@ -83,7 +83,7 @@ function clickYes() {
 }
 
 function addBook(title, author, year, cover_id, table) {
-  const book = {id: id, title: title, author: author, year: year, cover: cover_id, table: table}
+  const book = {id: id, title: title, author: author, year: year, cover: cover_id, table: table, favorite: false}
   if ( bookArchive.filter(el => el.title === book.title && el.table === book.table).length === 0 ) {
     bookArchive.push(book);
     id += 1;
@@ -146,4 +146,31 @@ function moveBook(id, table) {
     }
   })
   generateTables();
+}
+
+function addToFavorites(id) {
+  bookArchive.map( (book) => {
+    if ( book.id = id ) {
+      book.favorite = true;
+    }
+  })
+  clearFavorites();
+  updateFavorites();
+
+  function clearFavorites() {
+    document.getElementById("favorites").innerHTML = ``;
+  }
+  function updateFavorites() {
+    for ( let book in bookArchive ) {
+      if ( bookArchive[book].favorite === true ) {
+        const coverId = bookArchive[book].cover;
+        const bookCover = getCover(coverId);
+        document.getElementById("favorites").innerHTML += bookCover;
+      }
+    }
+
+    function getCover(coverId) {
+      return `<div id="favorite-${coverId}"><img id="cover-image" src="http://covers.openlibrary.org/b/id/${coverId}-S.jpg"></img></div>`
+    }
+  }
 }
