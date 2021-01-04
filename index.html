@@ -8,7 +8,7 @@
     <title>Bookkeeper App</title>
 </head>
 <body>
-    <h1>Bookkeeper</h1>
+    <h1>MyBooks</h1>
     <img id="logo-image" src="https://media.wired.com/photos/5be4cd03db23f3775e466767/125:94/w_2375,h_1786,c_limit/books-521812297.jpg">
     <div id="search-box">
         <input type="search" id="site-search" placeholder="Search for books...">
@@ -21,17 +21,35 @@
     <div id="book-interface">
     </div>
     <div class="book-tables">
-        <div class="book-table" id="read-column">
-
+        <div class="book-table" id="finished">
+            <h3>Finished</h3>
+            <table id="finished-table">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>...</th>
+                </tr>
+            </table>
         </div>
-        <div class="book-table" id="reading-columng">
-        
+        <div class="book-table" id="reading">
+            <h3>Currently Reading</h3>
+            <table id="reading-table">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>...</th>
+                </tr>
+            </table>
         </div>
-        <div class="book-table" id="to-read-column">
-        
-        </div>
-        <div class="book-table" id="wishlist-column">
-        
+        <div class="book-table" id="wishlist">
+            <h3>Wishlist</h3>
+            <table id="wishlist-table">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>...</th>
+                </tr>
+            </table>
         </div>
     </div>
 </body>

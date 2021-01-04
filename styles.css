@@ -72,14 +72,30 @@ span {
 }
 .book-table {
     flex:1;
-    max-width: 25rem;
-    height: 10rem;
-    border:solid;
+    border: 1px solid;
     display:flex;
     flex-direction: column;
     margin: 2rem;
-    margin-top: 0.8rem;
+    margin-top: 0;
 }
 button {
     font-size: 1rem;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+th, td {
+    padding: 0.25rem;
+}
+td {
+    text-align: center;
+}
+h3 {
+    display: flex-box;
+    margin: auto;
+}
+#finished {
+    display: flex;
+
 }
