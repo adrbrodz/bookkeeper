@@ -11,12 +11,17 @@ body {background-color: rgb(240, 221, 196);}
 #favorites div {
     margin: 0.3rem;
 }
+a { 
+    color: rgb(71, 68, 231);
+    text-decoration: none;
+}
 h1 {
     width: 10rem;
     display: flex;
     margin: auto;
     justify-content: center;
     align-items: center;
+    margin-top: 10rem;
 }
 #logo-image {
     border-radius: 50%;

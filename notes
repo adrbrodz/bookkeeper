@@ -1,11 +1,21 @@
-show newest edition
-change title to camelCase
-search on enter
-add urls to spans to link to OpenLibrary
-show all/show less
-if cover not found make simple cover/placeholder
-add to favorites from book interface
+local storage - last
+
+lord of the rings/lord of the flies
+
+major {
+    what happens on no
+    search authors
+}
 
 
-only interface for options
-images instead of tables
+minor {
+    show newest edition
+    change title to camelCase
+    show all/show less
+    if cover not found make simple cover/placeholder
+    images in tables
+}
+
+favorites: 
+ on hover - title and authors
+ delete button
