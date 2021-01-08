@@ -1,15 +1,14 @@
+move items from interface -- dont add duplicates to tables
 local storage - last
 
-lord of the rings/lord of the flies
-
 major {
-    what happens on no
     search authors
 }
 
 
 minor {
     show newest edition
+    choose covers
     change title to camelCase
     show all/show less
     if cover not found make simple cover/placeholder

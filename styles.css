@@ -67,6 +67,17 @@ span {
     margin-top: 1.5rem;
     margin-bottom: 3rem;
 }
+#similar-titles-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#similar-titles-container h2 {
+    margin: 0;
+}
+#similar-titles td {
+    text-align: start;
+}
 #options {
     display:flex;
     flex-direction: column;

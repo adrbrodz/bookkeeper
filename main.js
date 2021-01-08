@@ -21,7 +21,7 @@ function processFetch(response) {
 }
 function updateQuestion(book_info) {
   try {
-    parsingBookData();
+    parsingBookData(book_info);
     document.getElementById("question").innerHTML =
       `<h2>Did you mean <span id="title-span"><a href="https://openlibrary.org/${titleKey}" target="_blank">${title}</a></span>
      by <span id="author-span"><a href="https://openlibrary.org/authors/${authorKey}" target="_blank">${author}</a></span>?</h2></br>`;
@@ -30,15 +30,14 @@ function updateQuestion(book_info) {
     document.getElementById("question").innerHTML =
       `<h2>No matches found. Please try another search.</h2>`
   }
-
-  function parsingBookData() {
-    title = book_info.title
-    titleKey = book_info.key
-    author = book_info.author_name[0]
-    authorKey = book_info.author_key
-    cover_id = book_info.cover_i
-    year = book_info.publish_year
-  }
+}
+function parsingBookData(book_info) {
+  title = book_info.title
+  titleKey = book_info.key
+  author = book_info.author_name[0]
+  authorKey = book_info.author_key[0]
+  cover_id = book_info.cover_i
+  year = book_info.publish_year[0]
 }
 var globalUrl = "";
 async function searchTitle() {
@@ -109,20 +108,63 @@ async function clickNo() {
   document.getElementById("question").innerHTML = "";
   document.getElementById("book-interface").style.visibility = "visible";
   document.getElementById("book-interface").innerHTML = 
-  `Other similar titles:
-  <table>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-    </tr>
-  </table>`
+  `<div id="similar-titles-container">
+    <h2> Searching for similar titles... </h2>
+   </div>`
   const response = await fetchFullData(globalUrl);
-  showSimilarTitles();
-
+  document.getElementById("book-interface").innerHTML = 
+  `<div id="similar-titles-container">
+    <h2>Similar titles:</h2>
+    <table id="similar-titles">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>...</th>
+        </tr>
+    </table>
+   </div>`
+  let similarTitles = [];
+  similarTitles = showSimilarTitles();
+  for ( let book in similarTitles ) {
+    bookId = id;
+    parsingBookData(similarTitles[book]);
+    document.getElementById("similar-titles").innerHTML +=
+    `<tr>
+      <td>${title}</td>
+      <td>${author}</td>
+      <td><button id="ok-button" onclick="clickOk('${title}', '${titleKey}', '${author}', '${authorKey}', '${cover_id}', '${year}')">ok</button></td>
+    </tr>`
+  }
   function showSimilarTitles() {
     var filteredTitles = booksFound.filter( book => book.has_fulltext == true )
     var similarTitles = filteredTitles.slice(1, 11)
+    return similarTitles;
   }
+}
+function clickOk(title, titleKey, author, authorKey, cover_id, year) {
+  title = title;
+  titleKey = titleKey;
+  author = author;
+  authorKey = authorKey;
+  cover_id = cover_id;
+  year = year;
+  document.getElementById("book-interface").style.visibility = "visible";
+  document.getElementById("book-interface").innerHTML =
+    `<div id="cover-image-container">
+    <img id="cover-image" src="http://covers.openlibrary.org/b/id/${cover_id}-M.jpg">
+  </div>
+  <div id="options-container">
+  <h2><span id="title-span"><a href="https://openlibrary.org/${titleKey}" target="_blank">${title}</a></span> 
+  by <span id="author-span"><a href="https://openlibrary.org/authors/${authorKey}" target="_blank">${author}</a></span></h2></br>
+  <div id="options">
+  <p>Add to Finished <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished', 'false')">-></button></p>
+  <p>Add to Currently Reading <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'reading', 'false')">-></button></p>
+  <p>Add to Wishlist <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'wishlist', 'false')">-></button></p>
+  <p>Save to Favorites <button id="favorites-button" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished',` + true + `)"><3</button></p>
+  <p>Show title in openlibrary.org <button><a href="https://openlibrary.org/${titleKey}" target="_blank">-></a></button></p>
+  <p>Show author in openlibrary.org <button><a href="https://openlibrary.org/authors/${authorKey}" target="_blank">-></a></button></p></div></dib>`
+  document.getElementById("answer-buttons").style.visibility = "hidden";
+  document.getElementById("question").innerHTML = "";
 }
 function addBook(title, author, year, cover_id, table, favorite) {
   const book = { id: id, title: title, author: author, year: year, cover: cover_id, table: table, favorite: favorite }
