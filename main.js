@@ -184,38 +184,20 @@ function generateTables() {
     for (let book in bookArchive) {
       const myBook = bookArchive[book];
       const table = bookArchive[book].table;
-      const bookId = bookArchive[book].id;
+      const coverId = bookArchive[book].cover;
+      const bookCover = getCover(coverId, 'M');
       document.getElementById(table + "-table").innerHTML +=
-        `<tr>
-          <td>${myBook.title}</td>
-          <td>${myBook.author}</td> 
-          <td><button id="favorite-button" onclick="addToFavorites(${bookId})"><3</button>
-              <button id="move-button" onclick="moveBook(${bookId}, 'finished')">V</button>
-              <button id="move-button" onclick="moveBook(${bookId}, 'reading')">-></button>
-              <button id="move-button" onclick="moveBook(${bookId}, 'wishlist')">*</button>
-              <button id="delete-button" onclick="deleteBook(${bookId})">x</button></td> 
-        </tr>`;
+        `<div class="myBook">
+          ${bookCover}
+          <h4>${myBook.title}</h4>
+          <h5>${myBook.author}</h5>
+        </div>`;
     }
   }
   function clearTables() {
-    document.getElementById("finished-table").innerHTML =
-      `<tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>...</th>
-  </tr>`;
-    document.getElementById("reading-table").innerHTML =
-      `<tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>...</th>
-  </tr>`;
-    document.getElementById("wishlist-table").innerHTML =
-      `<tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>...</th>
-  </tr>`;
+    document.getElementById("finished-table").innerHTML = ``;
+    document.getElementById("reading-table").innerHTML = ``;
+    document.getElementById("wishlist-table").innerHTML = ``;
   }
 }
 function deleteBook(id) {
@@ -246,14 +228,13 @@ function updateFavorites() {
   for (let book in bookArchive) {
     if (bookArchive[book].favorite === true) {
       const coverId = bookArchive[book].cover;
-      const bookCover = getCover(coverId);
+      const bookCover = getCover(coverId, 'S');
       document.getElementById("favorites").innerHTML += bookCover;
     }
   }
-
-  function getCover(coverId) {
-    return `<div id="favorite-${coverId}"><img id="cover-image" src="http://covers.openlibrary.org/b/id/${coverId}-S.jpg"></img></div>`
-  }
+}
+function getCover(coverId, size) {
+  return `<div id="favorite-${coverId}"><img id="cover-image" src="http://covers.openlibrary.org/b/id/${coverId}-${size}.jpg"></img></div>`
 }
 window.onload = function enterSearch() {
   const node = document.getElementById("site-search");

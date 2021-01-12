@@ -1,8 +1,14 @@
 move items from interface -- dont add duplicates to tables
 local storage - last
+view all
+dont clear pseudohero until book found
+keep interface in psuedohero
+only one table, switch between tables
+go back to question
 
 major {
     search authors
+    search history
 }
 
 
@@ -18,3 +24,6 @@ minor {
 favorites: 
  on hover - title and authors
  delete button
+
+ fix:
+  ' in titles

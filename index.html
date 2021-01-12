@@ -5,14 +5,20 @@
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookkeeper App</title>
+    <title>BookArchive App</title>
 </head>
 <body>
-    <h1>.bookplate</h1>
-        <img id="logo-image" src="https://media.wired.com/photos/5be4cd03db23f3775e466767/125:94/w_2375,h_1786,c_limit/books-521812297.jpg">
-    <div id="search-box">
-        <input type="search" id="site-search" placeholder="Search for books...">
-        <button id="search-button" onclick="searchTitle()">S</button>
+    <div id="top-bar">
+        <h1>Bookplate</h1>
+        <div id="search-box">
+            <input type="search" id="site-search" placeholder="Search for books...">
+            <button id="search-button" onclick="searchTitle()">S</button>
+        </div>
+        <div id="top-nav">
+        <button><3</button>
+        <button>0</button>
+        <button>EN</button>
+        </div>
     </div>
     <div id="question">
     </div>
@@ -21,39 +27,14 @@
     <button id="no-button" onclick="clickNo()">No</button>
     </div>
     <div id="book-interface">
+    psuedo-hero
     </div>
         <div id="favorites"></div>
     <div class="book-tables">
-        <div class="book-table" id="finished">
-            <h3>Finished</h3>
-            <table id="finished-table">
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>...</th>
-                </tr>
-            </table>
-        </div>
-        <div class="book-table" id="reading">
-            <h3>Currently Reading</h3>
-            <table id="reading-table">
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>...</th>
-                </tr>
-            </table>
-        </div>
-        <div class="book-table" id="wishlist">
-            <h3>Wishlist</h3>
-            <table id="wishlist-table">
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>...</th>
-                </tr>
-            </table>
-        </div>
+        <h3>Finished</h3>
+        <div class="book-table" id="finished-table"></div>
+        <div class="book-table" id="reading-table"></div>
+        <div class="book-table" id="wishlist-table"></div>
     </div>
 </body>
 </html>

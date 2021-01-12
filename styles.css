@@ -4,6 +4,9 @@
     padding: 0;
 }
 body {background-color: rgb(240, 221, 196);}
+#top-bar {
+    display: flex;
+}
 #favorites {
     padding: 0.3rem;
     display: flex;
@@ -15,33 +18,32 @@ a {
     color: rgb(71, 68, 231);
     text-decoration: none;
 }
-h1 {
-    width: 10rem;
+#top-bar {
     display: flex;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10rem;
+    padding: 3rem;
 }
-#logo-image {
-    border-radius: 50%;
-    height: 5rem;
-    width: 5rem;
-    display: flex;
-    margin: auto;
-    margin-top: 1rem;
+h1 {
+    flex: 1;
+    margin-left: 3rem;
+    font-size: 1.5rem;
 }
 #search-box {
-    margin-top: 1.8rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex: 1;
+}
+#top-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+#top-nav button {
+    margin-right: 1rem;
 }
 #site-search {
     border:solid white;
     font-size: 0.9rem;
     padding: 0.1rem;
-    width: 23rem;
+    width: 100%;
 }
 #question {
     margin-top: 1.5rem;
@@ -58,10 +60,11 @@ span {
     visibility: hidden;
 }
 #book-interface {
-    margin: auto;
-    width: 30rem;
+    background-color: rgb(240, 221, 196);
+    margin: 3rem;
+    margin-bottom: 0;
+    padding: 3rem;
     display: flex;
-    visibility: hidden;
 }
 #book-interface h2 {
     margin-top: 1.5rem;
@@ -89,15 +92,14 @@ span {
 }
 .book-tables {
     padding: 3rem;
+    padding-top: 1rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 .book-table {
-    flex:1;
-    border: 1px solid;
     display:flex;
-    flex-direction: column;
-    margin: 2rem;
+    margin: 3rem;
     margin-top: 0;
 }
 button {
@@ -114,8 +116,9 @@ td {
     text-align: center;
 }
 h3 {
-    display: flex-box;
-    margin: auto;
+    margin: 3rem;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 #finished {
     display: flex;
