@@ -46,6 +46,7 @@ h1 {
     width: 100%;
 }
 #question {
+    border: solid;
     margin-top: 1.5rem;
     display: flex;
     justify-content: center;
@@ -62,13 +63,16 @@ span {
 #book-interface {
     background-color: rgb(240, 221, 196);
     margin: 3rem;
+    margin-top: 0;
     margin-bottom: 0;
     padding: 3rem;
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #book-interface h2 {
+    text-align: center;
     margin-top: 1.5rem;
-    margin-bottom: 3rem;
 }
 #similar-titles-container {
     width: 100%;
@@ -82,13 +86,22 @@ span {
     text-align: start;
 }
 #options {
-    display:flex;
-    flex-direction: column;
-    align-items: flex-end;
+    display: flex;
+    justify-content: center;
+}
+#options button {
+    margin: 0.1rem;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 #cover-image-container {
     display: flex;
-    margin-right: 1.5rem;
+    height: 15rem;
+    width: 10rem;
+}
+#cover-image {
+    height: 15rem;
+    width: 10rem;
 }
 .book-tables {
     padding: 3rem;

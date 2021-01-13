@@ -1,20 +1,15 @@
+add cover to question
+"no similar titles found"
+favorites
+
 move items from interface
 dont allow same book in different tables
+
 view all
+
 only one table, switch between tables
+
 go back to question
-
-major {
-    if cover not found make simple cover/placeholder
-    search authors
-    search history
-}
-
-
-minor {
-    change title to camelCase
-}
-
 
  fix:
   ' in titles

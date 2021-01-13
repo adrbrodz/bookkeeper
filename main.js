@@ -1,8 +1,9 @@
 var bookArchive = [];
-localStorage = window.localStorage;
+var booksFound = [];
+var temporaryList = [];
 var id = 1;
+localStorage = window.localStorage;
 readLocalStorage();
-console.log(bookArchive)
 function readLocalStorage() {
   for ( let i = 2; i - 2  < localStorage.length; i++ ) {
     bookArchive.push(JSON.parse(localStorage.getItem(i)))
@@ -15,10 +16,15 @@ function fetchData(url) {
       fetch(url)
         .then(result => result.json())
         .then(data => {
+          temporaryList = [];
           for (let book in data.docs) {
-            return data.docs[book]
+            if ( data.docs[book].has_fulltext === true ) {
+              temporaryList.push(data.docs[book])
+            }
           }
-        })
+          return temporaryList[0]
+          }
+        )
     )
   })
 }
@@ -42,7 +48,7 @@ function updateQuestion(book_info) {
 function parsingBookData(book_info) {
   title = book_info.title
   titleKey = book_info.key
-  author = book_info.author_name[0]
+  author = book_info.author_name
   authorKey = book_info.author_key[0]
   cover_id = book_info.cover_i
   year = book_info.publish_year[0]
@@ -77,25 +83,25 @@ function generateUrl() {
   }
 }
 function clickYes() {
+  temporaryList = temporaryList.filter( book => book.has_fulltext === true )
   document.getElementById("book-interface").style.visibility = "visible";
   document.getElementById("book-interface").innerHTML =
     `<div id="cover-image-container">
     <img id="cover-image" src="http://covers.openlibrary.org/b/id/${cover_id}-M.jpg">
   </div>
+  <h2><span id="title-span"><a href="https://openlibrary.org/${titleKey}" target="_blank">${title}</a></span></br>
+  by <span id="author-span"><a href="https://openlibrary.org/authors/${authorKey}" target="_blank">${author}</a></span></h2>
   <div id="options-container">
-  <h2><span id="title-span"><a href="https://openlibrary.org/${titleKey}" target="_blank">${title}</a></span> 
-  by <span id="author-span"><a href="https://openlibrary.org/authors/${authorKey}" target="_blank">${author}</a></span></h2></br>
   <div id="options">
-  <p>Add to Finished <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished', 'false')">-></button></p>
-  <p>Add to Currently Reading <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'reading', 'false')">-></button></p>
-  <p>Add to Wishlist <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'wishlist', 'false')">-></button></p>
-  <p>Save to Favorites <button id="favorites-button" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished',` + true + `)"><3</button></p>
-  <p>Show title in openlibrary.org <button><a href="https://openlibrary.org/${titleKey}" target="_blank">-></a></button></p>
-  <p>Show author in openlibrary.org <button><a href="https://openlibrary.org/authors/${authorKey}" target="_blank">-></a></button></p></div></dib>`
+  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished', 'false')">F</button>
+  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'reading', 'false')">R</button>
+  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'wishlist', 'false')">W</button>
+  <button id="favorites-button" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished',` + true + `)"><3</button>
+  <button><a href="https://openlibrary.org/${titleKey}" target="_blank">-></a></button>
+  </div>`
   document.getElementById("answer-buttons").style.visibility = "hidden";
   document.getElementById("question").innerHTML = "";
 }
-var booksFound = [];
 function fetchFullData(url) {
   return new Promise((resolve, reject) => {
     console.log(`Making Request to ${url}`)
@@ -162,15 +168,14 @@ function clickOk(title, titleKey, author, authorKey, cover_id, year) {
     <img id="cover-image" src="http://covers.openlibrary.org/b/id/${cover_id}-M.jpg">
   </div>
   <div id="options-container">
-  <h2><span id="title-span"><a href="https://openlibrary.org/${titleKey}" target="_blank">${title}</a></span> 
+  <h2><span id="title-span"><a href="https://openlibrary.org/${titleKey}" target="_blank">${title}</a></span></br>
   by <span id="author-span"><a href="https://openlibrary.org/authors/${authorKey}" target="_blank">${author}</a></span></h2></br>
   <div id="options">
-  <p>Add to Finished <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished', 'false')">-></button></p>
-  <p>Add to Currently Reading <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'reading', 'false')">-></button></p>
-  <p>Add to Wishlist <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'wishlist', 'false')">-></button></p>
-  <p>Save to Favorites <button id="favorites-button" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished',` + true + `)"><3</button></p>
-  <p>Show title in openlibrary.org <button><a href="https://openlibrary.org/${titleKey}" target="_blank">-></a></button></p>
-  <p>Show author in openlibrary.org <button><a href="https://openlibrary.org/authors/${authorKey}" target="_blank">-></a></button></p></div></dib>`
+  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished', 'false')">F</button>
+  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'reading', 'false')">R</button>
+  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'wishlist', 'false')">W</button>
+  <button id="favorites-button" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished',` + true + `)"><3</button>
+  <button><a href="https://openlibrary.org/${titleKey}" target="_blank">-></a></button></div>`
   document.getElementById("answer-buttons").style.visibility = "hidden";
   document.getElementById("question").innerHTML = "";
 }
@@ -250,9 +255,11 @@ function updateFavorites() {
   }
 }
 function getCover(coverId, size, title, titleKey, author, authorKey, year) {
-  return `<div id="favorite-${coverId}">
-  <img id="cover-image" src="http://covers.openlibrary.org/b/id/${coverId}-${size}.jpg"
-  onclick="clickOk('${title}', '${titleKey}', '${author}', '${authorKey}', '${coverId}', '${year}')"></img></div>`
+  if ( coverId != 'undefined' ) {
+    return `<div id="favorite-${coverId}">
+    <img id="cover-image" src="http://covers.openlibrary.org/b/id/${coverId}-${size}.jpg"
+    onclick="clickOk('${title}', '${titleKey}', '${author}', '${authorKey}', '${coverId}', '${year}')"></img></div>`
+  } 
 }
 window.onload = function enterSearch() {
   populateTables();
