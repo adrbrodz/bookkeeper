@@ -1,5 +1,13 @@
 var bookArchive = [];
+localStorage = window.localStorage;
 var id = 1;
+readLocalStorage();
+console.log(bookArchive)
+function readLocalStorage() {
+  for ( let i = 2; i - 2  < localStorage.length; i++ ) {
+    bookArchive.push(JSON.parse(localStorage.getItem(i)))
+  }
+}
 function fetchData(url) {
   return new Promise((resolve, reject) => {
     console.log(`Making Request to ${url}`)
@@ -174,24 +182,32 @@ function addBook(title, author, year, cover_id, table, favorite) {
   }
   generateTables();
 }
+function populateTables() {
+  for (let book in bookArchive) {
+    const myBook = bookArchive[book];
+    const table = bookArchive[book].table;
+    const coverId = bookArchive[book].cover;
+    const bookCover = getCover(coverId, 'M', myBook.title, myBook.titleKey, myBook.author,
+                               myBook.authorKey, myBook.year);
+    document.getElementById(table + "-table").innerHTML +=
+      `<div class="myBook">
+        ${bookCover}
+        <h4>${myBook.title}</h4>
+        <h5>${myBook.author}</h5>
+      </div>`;
+  }
+}
 function generateTables() {
   clearTables();
   populateTables();
   clearFavorites();
   updateFavorites();
+  saveLocalStorage();
 
-  function populateTables() {
-    for (let book in bookArchive) {
+  function saveLocalStorage() {
+    for ( let book in bookArchive ) {
       const myBook = bookArchive[book];
-      const table = bookArchive[book].table;
-      const coverId = bookArchive[book].cover;
-      const bookCover = getCover(coverId, 'M');
-      document.getElementById(table + "-table").innerHTML +=
-        `<div class="myBook">
-          ${bookCover}
-          <h4>${myBook.title}</h4>
-          <h5>${myBook.author}</h5>
-        </div>`;
+      localStorage.setItem(id, JSON.stringify(myBook));
     }
   }
   function clearTables() {
@@ -233,10 +249,13 @@ function updateFavorites() {
     }
   }
 }
-function getCover(coverId, size) {
-  return `<div id="favorite-${coverId}"><img id="cover-image" src="http://covers.openlibrary.org/b/id/${coverId}-${size}.jpg"></img></div>`
+function getCover(coverId, size, title, titleKey, author, authorKey, year) {
+  return `<div id="favorite-${coverId}">
+  <img id="cover-image" src="http://covers.openlibrary.org/b/id/${coverId}-${size}.jpg"
+  onclick="clickOk('${title}', '${titleKey}', '${author}', '${authorKey}', '${coverId}', '${year}')"></img></div>`
 }
 window.onload = function enterSearch() {
+  populateTables();
   const node = document.getElementById("site-search");
   node.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {

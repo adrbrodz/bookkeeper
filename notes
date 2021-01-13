@@ -1,29 +1,20 @@
-move items from interface -- dont add duplicates to tables
-local storage - last
+move items from interface
+dont allow same book in different tables
 view all
-dont clear pseudohero until book found
-keep interface in psuedohero
 only one table, switch between tables
 go back to question
 
 major {
+    if cover not found make simple cover/placeholder
     search authors
     search history
 }
 
 
 minor {
-    show newest edition
-    choose covers
     change title to camelCase
-    show all/show less
-    if cover not found make simple cover/placeholder
-    images in tables
 }
 
-favorites: 
- on hover - title and authors
- delete button
 
  fix:
   ' in titles
