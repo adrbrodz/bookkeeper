@@ -93,10 +93,10 @@ function clickYes() {
   by <span id="author-span"><a href="https://openlibrary.org/authors/${authorKey}" target="_blank">${author}</a></span></h2>
   <div id="options-container">
   <div id="options">
-  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished', 'false')">F</button>
-  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'reading', 'false')">R</button>
-  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'wishlist', 'false')">W</button>
-  <button id="favorites-button" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished',` + true + `)"><3</button>
+  <button id="add-to" onclick="addBook("${title}", "${author}", '${year}', '${cover_id}', 'finished', 'false')">F</button>
+  <button id="add-to" onclick="addBook("${title}", "${author}", '${year}', '${cover_id}', 'reading', 'false')">R</button>
+  <button id="add-to" onclick="addBook("${title}", "${author}", '${year}', '${cover_id}', 'wishlist', 'false')">W</button>
+  <button id="favorites-button" onclick="addBook("${title}", "${author}", '${year}', '${cover_id}', 'finished',` + true + `)"><3</button>
   <button><a href="https://openlibrary.org/${titleKey}" target="_blank">-></a></button>
   </div>`
   document.getElementById("answer-buttons").style.visibility = "hidden";
@@ -146,7 +146,7 @@ async function clickNo() {
     `<tr>
       <td>${title}</td>
       <td>${author}</td>
-      <td><button id="ok-button" onclick="clickOk('${title}', '${titleKey}', '${author}', '${authorKey}', '${cover_id}', '${year}')">ok</button></td>
+      <td><button id="ok-button" onclick="clickOk("${title}", '${titleKey}', "${author}", '${authorKey}', '${cover_id}', '${year}')">ok</button></td>
     </tr>`
   }
   function showSimilarTitles() {
@@ -171,10 +171,10 @@ function clickOk(title, titleKey, author, authorKey, cover_id, year) {
   <h2><span id="title-span"><a href="https://openlibrary.org/${titleKey}" target="_blank">${title}</a></span></br>
   by <span id="author-span"><a href="https://openlibrary.org/authors/${authorKey}" target="_blank">${author}</a></span></h2></br>
   <div id="options">
-  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished', 'false')">F</button>
-  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'reading', 'false')">R</button>
-  <button id="add-to" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'wishlist', 'false')">W</button>
-  <button id="favorites-button" onclick="addBook('${title}', '${author}', '${year}', '${cover_id}', 'finished',` + true + `)"><3</button>
+  <button id="add-to" onclick="addBook("${title}", "${author}", '${year}', '${cover_id}', 'finished', 'false')">F</button>
+  <button id="add-to" onclick="addBook("${title}", "${author}", '${year}', '${cover_id}', 'reading', 'false')">R</button>
+  <button id="add-to" onclick="addBook("${title}", "${author}", '${year}', '${cover_id}', 'wishlist', 'false')">W</button>
+  <button id="favorites-button" onclick="addBook("${title}", "${author}", '${year}', '${cover_id}', 'finished',` + true + `)"><3</button>
   <button><a href="https://openlibrary.org/${titleKey}" target="_blank">-></a></button></div>`
   document.getElementById("answer-buttons").style.visibility = "hidden";
   document.getElementById("question").innerHTML = "";
@@ -258,7 +258,7 @@ function getCover(coverId, size, title, titleKey, author, authorKey, year) {
   if ( coverId != 'undefined' ) {
     return `<div id="favorite-${coverId}">
     <img id="cover-image" src="http://covers.openlibrary.org/b/id/${coverId}-${size}.jpg"
-    onclick="clickOk('${title}', '${titleKey}', '${author}', '${authorKey}', '${coverId}', '${year}')"></img></div>`
+    onclick="clickOk("${title}", '${titleKey}', "${author}", '${authorKey}', '${coverId}', '${year}')"></img></div>`
   } 
 }
 window.onload = function enterSearch() {
