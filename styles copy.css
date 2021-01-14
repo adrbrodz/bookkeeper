@@ -1,0 +1,138 @@
+* {
+    display: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {background-color: rgb(240, 221, 196);}
+#top-bar {
+    display: flex;
+}
+#favorites {
+    padding: 0.3rem;
+    display: flex;
+}
+#favorites div {
+    margin: 0.3rem;
+}
+a { 
+    color: rgb(71, 68, 231);
+    text-decoration: none;
+}
+#top-bar {
+    display: flex;
+    padding: 3rem;
+}
+h1 {
+    flex: 1;
+    margin-left: 3rem;
+    font-size: 1.5rem;
+}
+#search-box {
+    display: flex;
+    flex: 1;
+}
+#top-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+#top-nav button {
+    margin-right: 1rem;
+}
+#site-search {
+    border:solid white;
+    font-size: 0.9rem;
+    padding: 0.1rem;
+    width: 100%;
+}
+#question {
+    border: solid;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+span {
+    color:rgb(71, 68, 231);
+}
+#answer-buttons {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+}
+#book-interface {
+    background-color: rgb(240, 221, 196);
+    margin: 3rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#book-interface h2 {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+#similar-titles-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#similar-titles-container h2 {
+    margin: 0;
+}
+#similar-titles td {
+    text-align: start;
+}
+#options {
+    display: flex;
+    justify-content: center;
+}
+#options button {
+    margin: 0.1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+#cover-image-container {
+    display: flex;
+    height: 15rem;
+    width: 10rem;
+}
+#cover-image {
+    height: 15rem;
+    width: 10rem;
+}
+.book-tables {
+    padding: 3rem;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.book-table {
+    display:flex;
+    margin: 3rem;
+    margin-top: 0;
+}
+button {
+    font-size: 1rem;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+th, td {
+    padding: 0.25rem;
+}
+td {
+    text-align: center;
+}
+h3 {
+    margin: 3rem;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+#finished {
+    display: flex;
+}

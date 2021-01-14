@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookArchive App</title>
+</head>
+<body>
+    <div id="top-bar">
+        <h1 onclick="location.reload();">Bookplate</h1> <!-- href -->
+        <div id="search-box">
+            <input type="search" id="site-search" placeholder="Search for books...">
+            <button id="search-button" onclick="searchTitle()">S</button>
+        </div>
+        <div id="top-nav">
+            <button><3</button>
+            <button>0</button>
+            <button>EN</button>
+        </div>
+    </div>
+        <div id="question">
+    </div>
+    <div id="answer-buttons">
+    <button id="yes-button" onclick="clickYes()">Yes</button>
+    <button id="no-button" onclick="clickNo()">No</button>
+    </div>
+    <div id="book-interface">
+    psuedo-hero
+    </div>
+        <div id="favorites"></div>
+    <div class="book-tables">
+        <h3>Finished <button id="clear-button" onclick="clearTable('finished')">x</button></h3>
+        <div class="book-table" id="finished-table"></div>
+        <h3>Reading <button id="clear-button" onclick="clearTable('reading')">x</button></h3>
+        <div class="book-table" id="reading-table"></div>
+        <h3>Wishlist <button id="clear-button" onclick="clearTable('wishlist')">x</button></h3>
+        <div class="book-table" id="wishlist-table"></div>
+    </div>
+</body>
+</html>
