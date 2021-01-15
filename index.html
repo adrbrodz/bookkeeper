@@ -11,7 +11,7 @@
     <div id="app-container">
         <div id="top-bar">
             <div id="logo">
-                <h1 onclick="location.reload();">Bookplate</h1> <!-- href -->
+                <h1 id="logo-text" onclick="location.reload();">Bookplate</h1> <!-- href -->
             </div>
             <div id="search-box">
                 <input type="search" id="site-search" placeholder="Search for books...">
@@ -26,14 +26,16 @@
         <div id="book-interface">
             <h2>Build your library</h2>
             <h3>Start searching for books<h3>
-            <button>View all</button>
+            <button id="hero-view-all">View all</button>
         </div>
     <div id="current-shelf">
         <h3>Finished</h3>
+        <h3>Reading</h3>
+        <h3>Wishlist</h3>
         <button>View All</button>
     </div>
-    <div id="books-container">
-    </div>
+        <div id="books-container">
+        </div>
     </div>
 </body>
 </html>
