@@ -2,6 +2,7 @@
     display: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 html { font-size: 62.5%; } 
 body { font-size: 1.4rem; } /* =14px */
@@ -19,7 +20,7 @@ h1   { font-size: 2.4rem; } /* =24px */
 #EAA451 - orange
 */
 body {
-    background-color: #e9dbd0;
+    background-color: #ecdfd5;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -27,9 +28,10 @@ body {
 #app-container {
     margin: auto;
     background-color: #FCFBFA;
-    width: 80%;
+    min-width: 100rem;
+    width: 75%;
     min-height: 65rem;
-    height: 70%;
+    height: 80%;
     border-radius: 1.8rem;
 }
 #top-bar {
@@ -43,16 +45,20 @@ body {
     flex: 1;
 }
 #logo-text {
-    font-size: 1.8rem;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1.75rem;
 }
 #search-box {
     display: flex;
-    background-color: #eeeeee;
+    background-color: #ECECEC;
     flex: 2.5;
     padding: 0.5rem;
     border-radius: 0.4rem;
 }
 #site-search {
+    font-size: 1.125rem;
+    margin-left: 0.7rem;
     width: 100%;
     border: none;
     background: none;
@@ -63,35 +69,75 @@ body {
     margin-right: 1rem;
     border: none;
     background: none;
+    width: 1.5rem;
+    color: #7E6A80;
 }
 #top-icons {
     flex: 1;
     display: flex;
     justify-content: flex-end;
 }
+#favorites-button {
+    width: 1.5rem;
+    border: none;
+    background: none;
+    margin-right: 1.5rem;
+}
+#top-counter {
+    background-color: #4f4b8f;
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    color: #FCFBFA;
+    border-radius: 50%;
+    margin-right: 1.5rem;
+}
+#language-button {
+    color: #7E6A80;
+    border: none;
+    background: none;
+}
 #book-interface {
     display: flex;
-    flex-direction: column;
-    padding: 3rem;
-    border-radius: 0.5rem;
-    margin-top: 5rem;
+    padding: 1.5rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    border-radius: 1rem;
     margin-left: 7rem;
     margin-right: 7rem;
-    height: 25%;
-    background-color: #e9dbd0;
+    margin-top: 7rem;
+    height: 42.5%;
+    background-color: #ecdfd5;
+}
+#hero-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+}
+#hero-image {
+    display: flex;
+    flex: 1;
+}
+#hero-image img {
+    display: flex;
+    margin-left: auto;
+    max-height: 100%;
+    max-width: 100%;
 }
 #book-interface h2 {
     font-size: 2.5rem;
 }
 #book-interface h3 {
+    font-weight: 100;
     margin-top: 1rem;
     font-size: 1.4rem;
     color: gray;
+    line-height: 150%;
 }
 #hero-view-all {
-    margin-top: 1.5rem;
-    background: #ac9583;
+    margin-top: 1rem;
+    background: #F25E5E;
     color: white;
     padding: 0.75rem;
     border-radius: 0.5rem;
@@ -120,8 +166,8 @@ h2 {
     color: gray;
 }
 #books-container {
+    margin-top: 1rem;
     display: flex;
-    border: 1px gray solid;
     margin-left: 7rem;
     margin-right: 7rem;
     height: 27.5%;
