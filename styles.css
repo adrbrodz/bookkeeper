@@ -70,7 +70,7 @@ body {
     border: none;
     background: none;
     width: 1.5rem;
-    color: #7E6A80;
+    color: gray;
 }
 #top-icons {
     flex: 1;
@@ -93,7 +93,7 @@ body {
     margin-right: 1.5rem;
 }
 #language-button {
-    color: #7E6A80;
+    color: gray;
     border: none;
     background: none;
 }
@@ -105,7 +105,7 @@ body {
     border-radius: 1rem;
     margin-left: 7rem;
     margin-right: 7rem;
-    margin-top: 7rem;
+    margin-top: 5rem;
     height: 42.5%;
     background-color: #ecdfd5;
 }
@@ -143,6 +143,39 @@ body {
     border-radius: 0.5rem;
     border:none;
     width: 7.75rem;
+}
+#question-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 5rem;
+    flex-direction: column;
+}
+#question-box a { 
+    color: #4C25D9;
+    text-decoration: none;
+}
+#answer-buttons {
+    display: flex;
+    margin-top: 3.5rem;
+}
+#answer-buttons button {
+    font-size: 1.6rem;
+    color: white;
+    width: 15rem;
+    height: 3.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    margin: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#yes-button {
+    background: #4C25D9;
+}
+#no-button {
+    background: #F25E5E;
 }
 h2 {
     color: #4f4b8f;
