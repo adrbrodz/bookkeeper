@@ -61,7 +61,7 @@ async function searchTitle() {
     function updateQuestion(booksFound) {
         try {
             firstEntry = booksFound[0];
-            myBook = parsingBookData(firstEntry);
+            const myBook = parsingBookData(firstEntry);
             var titleUrl = `https://openlibrary.org/${myBook.titleKey}`;
             var authorUrl = 
             `https://openlibrary.org/authors/${myBook.authorKeys}`;
@@ -76,11 +76,15 @@ async function searchTitle() {
                 <button id="yes-button">Yes</button>
                 <button id="no-button">No</button>
             <div>`;
-          //  document.getElementById("answer-buttons").style.visibility = "visible";
+
+            var yesButton = document.getElementById("yes-button");
+            yesButton.onclick = function () {
+                showBookInterface(myBook)
+            }
+
             } catch (err) {
             document.getElementById("question-box").innerHTML =
-                //`<h2>No matches found. Please try another search.</h2>`
-                `${err}`
+                `<h2>No matches found. Please try another search.</h2>`
             }
     }
     function parsingBookData(firstEntry) {
@@ -101,6 +105,19 @@ async function searchTitle() {
 
 // Returning data in question
 // Yes/No
+
+function showBookInterface(book) {
+    document.getElementById("book-interface").innerHTML =
+    `<div id="myBook-interface">
+        <div id="cover-image-container">
+            <img id="cover-image" src="http://covers.openlibrary.org/b/id/${book.coverId}-M.jpg">
+        </div>
+        <h2>
+            <span id="book-title"><a href="https://openlibrary.org/${book.titleKey} target="_blank">${book.title}</a></span></br>
+            By <a href="https://openlibrary.org/authors/${book.authorKey}" target="_blank">${book.authors}</a>
+        </h2>
+    </div>`
+  }
 // Show book interface
 // Add to book archive
 // Generate tables

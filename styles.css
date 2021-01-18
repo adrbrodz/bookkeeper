@@ -152,7 +152,7 @@ body {
     padding: 5rem;
     flex-direction: column;
 }
-#question-box a { 
+#question-box a, #book-interface a { 
     color: #4C25D9;
     text-decoration: none;
 }
@@ -176,6 +176,16 @@ body {
 }
 #no-button {
     background: #F25E5E;
+}
+#myBook-interface {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+#cover-image {
+    width: 15rem;
+    margin: 1.5rem;
 }
 h2 {
     color: #4f4b8f;
