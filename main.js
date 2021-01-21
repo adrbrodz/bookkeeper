@@ -1,6 +1,5 @@
 var bookArchive = [];
-
-// Fetch data on site search
+var currentShelf = "finished";
 
 async function searchTitle() {
     if (document.getElementById("site-search").value != "") {
@@ -103,24 +102,89 @@ async function searchTitle() {
     }
 }
 
-// Returning data in question
-// Yes/No
-
 function showBookInterface(book) {
     document.getElementById("book-interface").innerHTML =
     `<div id="myBook-interface">
         <div id="cover-image-container">
             <img id="cover-image" src="http://covers.openlibrary.org/b/id/${book.coverId}-M.jpg">
         </div>
-        <h2>
-            <span id="book-title"><a href="https://openlibrary.org/${book.titleKey} target="_blank">${book.title}</a></span></br>
-            By <a href="https://openlibrary.org/authors/${book.authorKey}" target="_blank">${book.authors}</a>
-        </h2>
+        <div id="right-container">
+            <div id="title-container">
+                <h2>
+                    <span id="book-title"><a href="https://openlibrary.org/${book.titleKey} target="_blank">${book.title}</a></span></br>
+                    By <a href="https://openlibrary.org/authors/${book.authorKey}" target="_blank">${book.authors}</a>
+                </h2>
+            </div>
+            <div id="option-buttons">
+                <button id="add-finished">Add to Finished</button>
+                <button id="add-reading">Add to Reading</button>
+                <button id="add-wishlist">Add to Wishlist</button>
+                <button id="add-favorite">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0
+                    00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>`
-  }
-// Show book interface
-// Add to book archive
+
+    var addButton = document.getElementById("add-finished");
+    addButton.onclick = function () {
+        book.shelf = "finished";
+        addBook(book);
+    }
+    var addButton = document.getElementById("add-reading");
+    addButton.onclick = function () {
+        book.shelf = "reading";
+        addBook(book);
+    }
+    var addButton = document.getElementById("add-wishlist");
+    addButton.onclick = function () {
+        book.shelf = "wishlist";
+        addBook(book);
+    }
+    function addBook(book) {
+        if (bookArchive.filter(el => el.titleKey === book.titleKey && el.shelf === book.shelf).length === 0) {
+            bookArchive.push(book);
+        } else {
+            bookArchive.map((book) => {
+                book.shelf = book.shelf;
+            })
+        }
+        generateShelf();
+    }
+}
+
 // Generate tables
+
+function generateShelf() {
+    clearShelf();
+    populateShelf();
+
+    function clearShelf() {
+        document.getElementById("books-container").innerHTML = ``;
+    }
+
+    function populateShelf() {
+        for ( let book in bookArchive ) {
+            myBook = bookArchive[book];
+            if ( myBook.shelf == currentShelf ) {
+                document.getElementById("books-container").innerHTML +=
+                `<div id="myBook">
+                <img src="http://covers.openlibrary.org/b/id/${myBook.coverId}-M.jpg">
+                <div id="myBook-title-container">
+                    <p id="myBook-title">${myBook.title}</p>
+                </div>
+                <p id="myBook-author">${myBook.authors}</p>
+                </div>`
+            }
+        }
+    }
+}
+
+
 // Switch between tables
 // Favorites
 // View all

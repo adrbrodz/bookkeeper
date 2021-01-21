@@ -30,7 +30,7 @@ body {
     background-color: #FCFBFA;
     min-width: 100rem;
     width: 75%;
-    min-height: 65rem;
+    min-height: 67rem;
     height: 80%;
     border-radius: 1.8rem;
 }
@@ -106,7 +106,7 @@ body {
     margin-left: 7rem;
     margin-right: 7rem;
     margin-top: 5rem;
-    height: 42.5%;
+    height: 35%;
     background-color: #ecdfd5;
 }
 #hero-text {
@@ -180,11 +180,55 @@ body {
 #myBook-interface {
     display: flex;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+#right-container {
+    display: flex;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#title-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-left: 0.2rem;
+}
+#option-buttons {
+    width: 100%;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
+#add-finished, #add-reading, #add-wishlist {
+    width: 10rem;
+    height: 3.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    background: #4C25D9;
+    margin: 0.2rem;
+    font-size: small;
+}
+#add-favorite {
+    margin-left: auto;
+    margin-right: 0.2rem;
+    width: 3rem;
+    border: none;
+    background: none;
+    color: #F25E5E;
+}
+#cover-image-container {
+    display: flex;
+    height: 100%;
+}
 #cover-image {
-    width: 15rem;
+    width: 100%;
+    max-width: 14.5rem;
+    max-height: 23rem;
     margin: 1.5rem;
 }
 h2 {
@@ -194,7 +238,7 @@ h2 {
     display: flex;
     margin-left: 7rem;
     margin-right: 7rem;
-    margin-top: 3.5rem;
+    margin-top: 2.5rem;
     margin-bottom: 1rem;
 }
 #current-shelf h3 {
@@ -213,5 +257,31 @@ h2 {
     display: flex;
     margin-left: 7rem;
     margin-right: 7rem;
-    height: 27.5%;
+    height: 20rem;
+}
+#myBook {
+    margin-right: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+#myBook img {
+    height: 15.5rem;
+    width: 11rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(199, 199, 199);
+}
+#myBook-title {
+    display:inline-block;
+    margin-top: 0.9rem;
+    font-size: larger;
+    width: 12rem;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#myBook-author {
+    font-size: smaller;
+    color: gray;
+    margin-top: 0.4rem;
 }
