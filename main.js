@@ -111,8 +111,8 @@ function showBookInterface(book) {
         <div id="right-container">
             <div id="title-container">
                 <h2>
-                    <span id="book-title"><a href="https://openlibrary.org/${book.titleKey} target="_blank">${book.title}</a></span></br>
-                    By <a href="https://openlibrary.org/authors/${book.authorKey}" target="_blank">${book.authors}</a>
+                    <p><span id="book-title"><a href="https://openlibrary.org/${book.titleKey} target="_blank">${book.title}</a></span></p>
+                    <p>By <a href="https://openlibrary.org/authors/${book.authorKey}" target="_blank">${book.authors}</a></p>
                 </h2>
             </div>
             <div id="option-buttons">
@@ -157,8 +157,6 @@ function showBookInterface(book) {
     }
 }
 
-// Generate tables
-
 function generateShelf() {
     clearShelf();
     populateShelf();
@@ -173,7 +171,7 @@ function generateShelf() {
             if ( myBook.shelf == currentShelf ) {
                 document.getElementById("books-container").innerHTML +=
                 `<div id="myBook">
-                <img src="http://covers.openlibrary.org/b/id/${myBook.coverId}-M.jpg">
+                <img onclick="fetchBook('${myBook.titleKey}')" src="http://covers.openlibrary.org/b/id/${myBook.coverId}-M.jpg">
                 <div id="myBook-title-container">
                     <p id="myBook-title">${myBook.title}</p>
                 </div>
@@ -183,12 +181,15 @@ function generateShelf() {
         }
     }
 }
-
+function fetchBook(titleKey) {
+    var book = bookArchive.filter(el => el.titleKey == titleKey)
+    showBookInterface(book[0]);
+}
 
 // Switch between tables
+// Local storage
 // Favorites
 // View all
-// Local storage
 
 window.onload = function enterSearch() {
     const node = document.getElementById("site-search");
