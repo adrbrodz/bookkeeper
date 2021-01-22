@@ -14,8 +14,8 @@
 <body>
     <div id="app-container">
         <div id="top-bar">
-            <div id="logo">
-                <h1 id="logo-text" onclick="location.reload();">Bookplate</h1> <!-- href -->
+            <div id="logo" onclick="location.reload();">
+                <h1 id="logo-text" >Bookplate</h1> <!-- href -->
             </div>
             <div id="search-box">
                 <input type="search" id="site-search" placeholder="Search for books...">
@@ -33,7 +33,7 @@
                          00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                 </button>
-                <button id="top-counter">0</button>
+                <button id="collection-counter">0</button>
                 <button id="language-button">EN</button>
             </div>
         </div>
@@ -49,10 +49,16 @@
         </div>
     <div id="bookshelf">
         <div id="current-shelf">
-            <h3>Finished</h3>
-            <h3>Reading</h3>
-            <h3>Wishlist</h3>
-            <button>View All</button>
+            <button class="shelf-button" onclick="changeShelf('finished')" id="finished-shelf">
+                <h3>Finished</h3>
+            </button>
+            <button class="shelf-button" onclick="changeShelf('reading')" id="reading-shelf">
+                <h3>Reading</h3>
+            </button>
+            <button class="shelf-button" onclick="changeShelf('wishlist')" id="wishlist-shelf">
+                <h3>Wishlist</h3>
+            </button>
+            <button id="view-all">View All</button>
         </div>
             <div id="books-container">
         </div>

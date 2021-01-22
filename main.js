@@ -1,6 +1,13 @@
 var bookArchive = [];
 var currentShelf = "finished";
 
+localStorage = window.localStorage;
+readLocalStorage();
+
+function readLocalStorage() {
+    bookArchive = (JSON.parse(localStorage.getItem('bookArchive')));
+}
+
 async function searchTitle() {
     if (document.getElementById("site-search").value != "") {
 
@@ -67,7 +74,7 @@ async function searchTitle() {
 
             document.getElementById("question-box").innerHTML =
             `<h2>Did you mean 
-                <a href="${titleUrl}" target="_blank">${myBook.title}</a>
+                <a href="${titleUrl}" target="_blank">${myBook.title}</a></br>
                 by
                 <a href="${authorUrl}" target="_blank">${myBook.authors}</a>?
             </h2>
@@ -153,13 +160,18 @@ function showBookInterface(book) {
                 book.shelf = book.shelf;
             })
         }
+        updateCounter();
         generateShelf();
     }
 }
 
+function updateCounter() {
+    document.getElementById("collection-counter").innerHTML = bookArchive.length;
+}
 function generateShelf() {
     clearShelf();
     populateShelf();
+    localStorage.setItem('bookArchive', JSON.stringify(bookArchive));
 
     function clearShelf() {
         document.getElementById("books-container").innerHTML = ``;
@@ -171,7 +183,11 @@ function generateShelf() {
             if ( myBook.shelf == currentShelf ) {
                 document.getElementById("books-container").innerHTML +=
                 `<div id="myBook">
-                <img onclick="fetchBook('${myBook.titleKey}')" src="http://covers.openlibrary.org/b/id/${myBook.coverId}-M.jpg">
+                <div id="image-wrap">
+                    <button id="shelf-delete-button" onclick="deleteBook('${myBook.titleKey}')">x</button>
+                    <img onclick="fetchBook('${myBook.titleKey}')" title="${myBook.title} by ${myBook.authors}"
+                    src="http://covers.openlibrary.org/b/id/${myBook.coverId}-M.jpg">
+                </div>
                 <div id="myBook-title-container">
                     <p id="myBook-title">${myBook.title}</p>
                 </div>
@@ -186,16 +202,36 @@ function fetchBook(titleKey) {
     showBookInterface(book[0]);
 }
 
-// Switch between tables
-// Local storage
+function changeShelf(shelf) {
+    currentShelf = shelf;
+    var shelves = document.getElementsByClassName("shelf-button");
+    for ( var i = 0; i < shelves.length; i++ ) {
+        shelves[i].style.color = 'gray';
+    }
+    document.getElementById(shelf+'-shelf').style.color='#4f4b8f';
+    generateShelf();
+}
+function deleteBook(titleKey) {
+    bookArchive = bookArchive.filter( el => el.titleKey != titleKey )
+    updateCounter();
+    generateShelf();
+}
+
 // Favorites
 // View all
 
 window.onload = function enterSearch() {
+    generateShelf();
+    document.getElementById("finished-shelf").style.color='#4f4b8f';
+    document.getElementById("reading-shelf").style.color='gray';
+    document.getElementById("wishlist-shelf").style.color='gray';
     const node = document.getElementById("site-search");
     node.addEventListener("keyup", function (event) {
       if (event.key === "Enter") {
         searchTitle();
       }
     })
-  };
+    };
+
+/// a promised land sorting
+// scroll on shelf
