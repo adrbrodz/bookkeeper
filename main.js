@@ -1,11 +1,15 @@
 var bookArchive = [];
+var favorites = [];
 var currentShelf = "finished";
 
 localStorage = window.localStorage;
 readLocalStorage();
 
 function readLocalStorage() {
-    bookArchive = (JSON.parse(localStorage.getItem('bookArchive')));
+    storedArchive = (JSON.parse(localStorage.getItem('bookArchive')));
+    if ( storedArchive != null ) {
+        bookArchive = storedArchive;
+    }
 }
 
 async function searchTitle() {
@@ -49,9 +53,9 @@ async function searchTitle() {
                         {
                             booksFound = [];
                             for (let book in data.docs) {
-                                if ( data.docs[book].has_fulltext === true ) {
+                               // if ( data.docs[book].has_fulltext === true ) {
                                 booksFound.push(data.docs[book])
-                                }
+                               // }
                             }
                             return booksFound
                         })
@@ -110,6 +114,26 @@ async function searchTitle() {
 }
 
 function showBookInterface(book) {
+    var finishedButton = "Add to Finished";
+    var readingButton = "Add to Reading";
+    var wishlistButton = "Add to Wishlist";
+    switch(book.shelf){
+        case 'finished':
+            var finishedButton = "Finished";
+            var readingButton = "Move to Reading";
+            var wishlistButton = "Move to Wishlist";
+            break;
+        case 'reading':
+            var readingButton = "Reading";
+            var finishedButton = "Move to Finished";
+            var wishlistButton = "Move to Wishlist";
+            break;
+        case 'wishlist':
+            var wishlistButton = "Wishlist";
+            var finishedButton = "Move to Finished";
+            var readingButton = "Move to Reading";
+            break;
+    }
     document.getElementById("book-interface").innerHTML =
     `<div id="myBook-interface">
         <div id="cover-image-container">
@@ -123,9 +147,9 @@ function showBookInterface(book) {
                 </h2>
             </div>
             <div id="option-buttons">
-                <button id="add-finished">Add to Finished</button>
-                <button id="add-reading">Add to Reading</button>
-                <button id="add-wishlist">Add to Wishlist</button>
+                <button id="add-finished">${finishedButton}</button>
+                <button id="add-reading">${readingButton}</button>
+                <button id="add-wishlist">${wishlistButton}</button>
                 <button id="add-favorite">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
@@ -139,18 +163,30 @@ function showBookInterface(book) {
 
     var addButton = document.getElementById("add-finished");
     addButton.onclick = function () {
-        book.shelf = "finished";
-        addBook(book);
+        if ( document.getElementById("add-finished").innerHTML == 'Finished' ) {
+            changeShelf('finished');
+        } else {
+            book.shelf = "finished";
+            addBook(book);
+        }
     }
     var addButton = document.getElementById("add-reading");
     addButton.onclick = function () {
-        book.shelf = "reading";
-        addBook(book);
+        if ( document.getElementById("add-reading").innerHTML == 'Reading' ) {
+            changeShelf('reading');
+        } else {
+            book.shelf = "reading";
+            addBook(book);
+        }
     }
     var addButton = document.getElementById("add-wishlist");
     addButton.onclick = function () {
-        book.shelf = "wishlist";
-        addBook(book);
+        if ( document.getElementById("add-wishlist").innerHTML == 'Wishlist' ) {
+            changeShelf('wishlist');
+        } else {
+            book.shelf = "wishlist";
+            addBook(book);
+        }
     }
     function addBook(book) {
         if (bookArchive.filter(el => el.titleKey === book.titleKey && el.shelf === book.shelf).length === 0) {
@@ -162,17 +198,21 @@ function showBookInterface(book) {
         }
         updateCounter();
         generateShelf();
+        showBookInterface(book);
+
     }
 }
 
 function updateCounter() {
-    document.getElementById("collection-counter").innerHTML = bookArchive.length;
+    if ( bookArchive ) {
+        document.getElementById("collection-counter").innerHTML = bookArchive.length;
+    }
 }
+
 function generateShelf() {
     clearShelf();
     populateShelf();
     localStorage.setItem('bookArchive', JSON.stringify(bookArchive));
-
     function clearShelf() {
         document.getElementById("books-container").innerHTML = ``;
     }
@@ -217,10 +257,13 @@ function deleteBook(titleKey) {
     generateShelf();
 }
 
-// Favorites
+// Click No
+// scroll on shelf
 // View all
+// Favorite
 
 window.onload = function enterSearch() {
+    updateCounter();
     generateShelf();
     document.getElementById("finished-shelf").style.color='#4f4b8f';
     document.getElementById("reading-shelf").style.color='gray';
@@ -234,4 +277,3 @@ window.onload = function enterSearch() {
     };
 
 /// a promised land sorting
-// scroll on shelf

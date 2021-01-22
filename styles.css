@@ -20,7 +20,7 @@ body {
     min-width: 100rem;
     width: 75%;
     min-height: 67rem;
-    height: 80%;
+    height: 81.5%;
     border-radius: 1.8rem;
 }
 #top-bar {
@@ -79,7 +79,6 @@ body {
     color: #FCFBFA;
     border-radius: 50%;
     margin-right: 1.5rem;
-    font-weight: bolder;
 }
 #language-button {
     color: gray;
@@ -200,7 +199,7 @@ body {
     align-items: center;
 }
 #add-finished, #add-reading, #add-wishlist {
-    width: 10rem;
+    width: 12rem;
     height: 3.5rem;
     border-radius: 0.5rem;
     border: none;
