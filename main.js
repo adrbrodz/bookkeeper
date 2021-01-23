@@ -1,6 +1,8 @@
 var bookArchive = [];
 var favorites = [];
 var currentShelf = "finished";
+var similarBooks = [];
+var currentBook = '';
 
 localStorage = window.localStorage;
 readLocalStorage();
@@ -53,9 +55,9 @@ async function searchTitle() {
                         {
                             booksFound = [];
                             for (let book in data.docs) {
-                               // if ( data.docs[book].has_fulltext === true ) {
+                                if ( data.docs[book].cover_i != null ) {
                                 booksFound.push(data.docs[book])
-                               // }
+                                }
                             }
                             return booksFound
                         })
@@ -91,29 +93,34 @@ async function searchTitle() {
             yesButton.onclick = function () {
                 showBookInterface(myBook)
             }
-
-            } catch (err) {
+            var noButton = document.getElementById("no-button");
+            noButton.onclick = function () {
+                showSimilarTitles(booksFound);
+            }
+        } catch (err) {
             document.getElementById("question-box").innerHTML =
                 `<h2>No matches found. Please try another search.</h2>`
             }
     }
-    function parsingBookData(firstEntry) {
-        title = firstEntry["title"]
-        titleKey = firstEntry["key"]
-        authors = firstEntry["author_name"]
-        authorKeys = firstEntry["author_key"]
-        coverId = firstEntry["cover_i"]
-        publishYears = firstEntry["publish_year"]
+}
 
-        var myBook = { title: title, titleKey: titleKey, authors: authors,
-                       authorKeys: authorKeys, coverId: coverId,
-                       publishYears: publishYears }
+function parsingBookData(firstEntry) {
+    title = firstEntry["title"]
+    titleKey = firstEntry["key"]
+    authors = firstEntry["author_name"]
+    authorKeys = firstEntry["author_key"]
+    coverId = firstEntry["cover_i"]
+    publishYears = firstEntry["publish_year"]
 
-        return myBook;
-    }
+    var myBook = { title: title, titleKey: titleKey, authors: authors,
+                   authorKeys: authorKeys, coverId: coverId,
+                   publishYears: publishYears }
+
+    return myBook;
 }
 
 function showBookInterface(book) {
+    currentBook = book.titleKey;
     var finishedButton = "Add to Finished";
     var readingButton = "Add to Reading";
     var wishlistButton = "Add to Wishlist";
@@ -134,6 +141,7 @@ function showBookInterface(book) {
             var readingButton = "Move to Reading";
             break;
     }
+    console.log(book)
     document.getElementById("book-interface").innerHTML =
     `<div id="myBook-interface">
         <div id="cover-image-container">
@@ -143,7 +151,7 @@ function showBookInterface(book) {
             <div id="title-container">
                 <h2>
                     <p><span id="book-title"><a href="https://openlibrary.org/${book.titleKey} target="_blank">${book.title}</a></span></p>
-                    <p>By <a href="https://openlibrary.org/authors/${book.authorKey}" target="_blank">${book.authors}</a></p>
+                    <p>By <a href="https://openlibrary.org/author/${book.authorKeys[0]}" target="_blank">${book.authors}</a></p>
                 </h2>
             </div>
             <div id="option-buttons">
@@ -202,7 +210,30 @@ function showBookInterface(book) {
 
     }
 }
-
+function showSimilarTitles(books) {
+    similarBooks = books;
+    document.getElementById("book-interface").innerHTML = 
+    `<div id="similar-books-container"><h2>Similar titles:</div></h2>`;
+    for ( i = 1; i < 10; i++ ) {
+        myBook = parsingBookData(books[i]);
+        document.getElementById("similar-books-container").innerHTML +=
+        `<div id="myBook">
+        <div id="similar-image-wrap" onclick="passTitleKey('${myBook.titleKey}')">
+            <img id="similar-book-image" title="${myBook.title} by ${myBook.authors}"
+            src="http://covers.openlibrary.org/b/id/${myBook.coverId}-M.jpg">
+        </div>
+        <div id="myBook-title-container">
+            <p id="myBook-title">${myBook.title}</p>
+        </div>
+        <p id="myBook-author">${myBook.authors}</p>
+        </div>`
+    }
+}
+function passTitleKey(titleKey) {
+    myBook = similarBooks.filter(el => el.key == titleKey)[0];
+    myBook = parsingBookData(myBook);
+    showBookInterface(myBook);
+}
 function updateCounter() {
     if ( bookArchive ) {
         document.getElementById("collection-counter").innerHTML = bookArchive.length;
@@ -252,15 +283,21 @@ function changeShelf(shelf) {
     generateShelf();
 }
 function deleteBook(titleKey) {
-    bookArchive = bookArchive.filter( el => el.titleKey != titleKey )
+    myBook = bookArchive.filter( el => el.titleKey == titleKey )[0];
+    bookArchive = bookArchive.filter( el => el.titleKey != titleKey );
     updateCounter();
     generateShelf();
+    myBook.shelf = '';
+    if ( currentBook == titleKey ) {
+        showBookInterface(myBook);
+    }
 }
 
-// Click No
-// scroll on shelf
+// go back from similar title
 // View all
 // Favorite
+// lang
+// footer
 
 window.onload = function enterSearch() {
     updateCounter();
@@ -274,6 +311,4 @@ window.onload = function enterSearch() {
         searchTitle();
       }
     })
-    };
-
-/// a promised land sorting
+};

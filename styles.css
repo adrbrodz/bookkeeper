@@ -19,7 +19,7 @@ body {
     background-color: #FCFBFA;
     min-width: 100rem;
     width: 75%;
-    min-height: 67rem;
+    min-height: 70rem;
     height: 81.5%;
     border-radius: 1.8rem;
 }
@@ -174,7 +174,6 @@ body {
 }
 #right-container {
     display: flex;
-    height: 75%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -194,7 +193,7 @@ body {
     margin-bottom: 1.5rem;
 }
 #option-buttons {
-    width: 100%;
+    margin-top: 2.5rem;
     display: flex;
     align-items: center;
 }
@@ -217,8 +216,10 @@ body {
     color: #F25E5E;
 }
 #cover-image {
-    display: flex;
-    height: 30vh;
+    height: 18rem;
+    width: 12.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(199, 199, 199);
     margin: 1.5rem;
 }
 h2 {
@@ -251,7 +252,13 @@ h2 {
     display: flex;
     margin-left: 7rem;
     margin-right: 7rem;
-    height: 20rem;
+    height: 22rem;
+    overflow: scroll;
+}
+#similar-books-container h2 {
+    margin-bottom: 15rem;
+    margin-right: 2rem;
+    text-align: right;
 }
 #myBook {
     margin-right: 2rem;
@@ -264,7 +271,14 @@ h2 {
     width: 11rem;
     border-radius: 0.5rem;
     border: 1px solid rgb(199, 199, 199);
-
+}
+#similar-books-container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    overflow: scroll;
 }
 #shelf-delete-button {
     float: right;
@@ -276,7 +290,6 @@ h2 {
     margin: 0.1rem;
     padding: 0.1rem;
     border-radius: 0.35rem;
-
 }
 #myBook-title {
     display:inline-block;
